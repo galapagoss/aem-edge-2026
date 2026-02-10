@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p82002-e707352.adobeaemcloud.com/bin/franklin.delivery/galapagoss/aem-edge-2026/dev"
+    url: "https://author-p82002-e707352.adobeaemcloud.com/bin/franklin.delivery/galapagoss/aem-edge-2026/main"
     type: "markup"
     suffix: ".html"
