@@ -72,20 +72,6 @@
               }
             }
           }
-        },
-        {
-          "title": "Breadcrumb",
-          "id": "breadcrumb",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {
-                  "name": "Accordion"
-                }
-              }
-            }
-          }
         }
       ]
     },
@@ -189,6 +175,21 @@
           }
         },
         {
+          "title": "Breadcrumb",
+          "id": "breadcrumb",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Breadcrumb",
+                  "model": "breadcrumb"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Accordion",
           "id": "accordion",
           "plugins": {
@@ -196,7 +197,8 @@
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "name": "Accordion"
+                  "name": "Accordion",
+                  "model": "accordiong"
                 }
               }
             }
