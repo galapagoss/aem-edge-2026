@@ -92,6 +92,20 @@
               }
             }
           }
+        },{
+          "title": "Breadcrumb Section",
+          "id": "breadcrumb-section",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "name": "Breadcrumb Section",
+                  "model": "breadcrumb-section"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -184,21 +198,6 @@
                 "template": {
                   "name": "Breadcrumb",
                   "model": "breadcrumb"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Breadcrumb Section",
-          "id": "breadcrumb-section",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/section/v1/section",
-                "template": {
-                  "name": "Breadcrumb Section",
-                  "model": "breadcrumb-section"
                 }
               }
             }
