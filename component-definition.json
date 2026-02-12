@@ -72,6 +72,17 @@
               }
             }
           }
+        },
+        {
+          "title": "Breadcrumb",
+          "id": "breadcrumb",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block"
+              }
+            }
+          }
         }
       ]
     },
@@ -170,6 +181,17 @@
                   "name": "Hero",
                   "model": "hero"
                 }
+              }
+            }
+          }
+        },
+        {
+          "title": "Accordion",
+          "id": "accordion",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block"
               }
             }
           }

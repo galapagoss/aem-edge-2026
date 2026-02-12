@@ -2,7 +2,8 @@
   {
     "id": "main",
     "components": [
-      "section"
+      "section",
+      "breadcrumb"
     ]
   },
   {
@@ -16,7 +17,8 @@
       "cards",
       "columns",
       "fragment",
-      "quote"
+      "quote",
+      "accordion"
     ]
   },
   {
