@@ -9,7 +9,7 @@ import {
   waitForFirstImage,
   loadSection,
   loadSections,
-  loadCSS,
+  loadCSS
 } from './aem.js';
 
 /**

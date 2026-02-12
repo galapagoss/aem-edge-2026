@@ -259,6 +259,18 @@
   {
     "id": "breadcrumb",
     "fields": [
+      {
+         "component": "boolean",
+         "name": "icon",
+         "label": "Show homepage icon",
+         "valueType": "boolean"
+       },
+      {
+         "component": "text",
+         "valueType": "string",
+         "name": "basePrefix",
+         "label": "Base Url prefix"
+       }
      ]
   },
   {
