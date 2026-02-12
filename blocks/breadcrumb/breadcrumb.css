@@ -8,13 +8,6 @@ main > .breadcrumb-container {
   padding: 10px;
 }
 
-@media (min-width: 900px) {
-  main .breadcrumb-container {
-    grid-row: 1;
-    grid-column: 1 / span 2;
-  }
-}
-
 .breadcrumb > nav {
   color: var(--link-color);
   font-size: var(--body-font-size-xs);
@@ -28,4 +21,11 @@ main > .breadcrumb-container {
 
 .breadcrumb .breadcrumb-separator {
   margin-inline: 1.5ch;
+}
+
+@media (width >= 900px) {
+  main .breadcrumb-container {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+  }
 }
