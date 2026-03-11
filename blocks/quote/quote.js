@@ -6,4 +6,5 @@ export default function decorate(block) {
   quoteWrapper.replaceChildren(blockquote);
 
   console.log('quote block decorated');
+
 }
