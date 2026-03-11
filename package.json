@@ -12,7 +12,7 @@
     "build:json:models": "merge-json-cli -i \"models/_component-models.json\" -o \"component-models.json\"",
     "build:json:definitions": "merge-json-cli -i \"models/_component-definition.json\" -o \"component-definition.json\"",
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -31,10 +31,19 @@
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-json": "3.1.0",
     "eslint-plugin-xwalk": "github:adobe-rnd/eslint-plugin-xwalk",
-    "husky": "9.1.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.3.1",
     "merge-json-cli": "1.0.4",
     "npm-run-all": "4.1.5",
     "stylelint": "17.0.0",
     "stylelint-config-standard": "40.0.0"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix"
+    ],
+    "**/*.css": [
+      "stylelint --fix"
+    ]
   }
 }
