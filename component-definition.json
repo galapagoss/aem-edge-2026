@@ -55,6 +55,23 @@
               }
             }
           }
+        },
+        {
+          "title": "Quote",
+          "id": "quote",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Quote",
+                  "model": "quote",
+                  "quote": "<p>Think, McFly! Think!</p>",
+                  "author": "Biff Tannen"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -71,6 +88,20 @@
                 "resourceType": "core/franklin/components/section/v1/section",
                 "template": {
                   "model": "section"
+                }
+              }
+            }
+          }
+        },{
+          "title": "Breadcrumb Section",
+          "id": "breadcrumb-section",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "name": "Breadcrumb Section",
+                  "model": "breadcrumb-section"
                 }
               }
             }
@@ -152,6 +183,36 @@
                 "template": {
                   "name": "Hero",
                   "model": "hero"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Breadcrumb",
+          "id": "breadcrumb",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Breadcrumb",
+                  "model": "breadcrumb"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Accordion",
+          "id": "accordion",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Accordion",
+                  "model": "accordiong"
                 }
               }
             }

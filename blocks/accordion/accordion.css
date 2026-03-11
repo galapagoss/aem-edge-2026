@@ -1,0 +1,75 @@
+main .accordion .accordion-item {
+  border-bottom: 2px solid #80d6d3;
+}
+
+main .accordion.sub-accordion .accordion-item,
+main .accordion .accordion-item:last-child {
+  border-bottom: none;
+}
+
+main .accordion .accordion-item > h2 {
+  margin: 0;
+}
+
+main .accordion .accordion-item > :is(h2, h3) > .accordion-trigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  color: var(--headline-color);
+  line-height: 28px;
+  padding: 10px;
+  border-radius: 0;
+  background-color: #bfebe9;
+  text-align: left;
+  position: relative;
+}
+
+main .accordion .accordion-item > :is(h2, h3) > .accordion-trigger .accordion-title {
+  margin-right: 2rem;
+  display: inline-block;
+}
+
+main .accordion .accordion-item > :is(h2, h3) > .accordion-trigger::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 14px;
+  width: 14px;
+  height: 20px;
+  margin-left: 10px;
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2213%22%20height%3D%2218%22%20viewBox%3D%220%200%2013%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12.5712%208.71154C12.5712%209.26254%2012.3164%209.78303%2011.8802%2010.1234L3.44276%2016.7073C2.65759%2017.32%201.52097%2017.1845%200.904048%2016.4047C0.287127%2015.625%200.423521%2014.4962%201.20869%2013.8835L7.83671%208.71154L1.20869%203.53961C0.423522%202.92693%200.287127%201.79812%200.904049%201.01834C1.52097%200.238569%202.65759%200.103112%203.44276%200.715793L11.8802%207.29963C12.3164%207.64005%2012.5712%208.16054%2012.5712%208.71154Z%22%20fill%3D%22%23024C99%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+  background-repeat: no-repeat;
+}
+
+main .accordion .accordion-item > :is(h2, h3) > .accordion-trigger[aria-expanded="true"]::after {
+  transform: rotate(90deg);
+}
+
+main .accordion .accordion-item:nth-child(3n + 2) > h2 > .accordion-trigger {
+  background: var(--clr-off-white);
+}
+
+main .accordion .accordion-item:nth-child(3n + 3) > h2 > .accordion-trigger {
+  background: #d1e7f1;
+}
+
+main .accordion .accordion-item > .accordion-panel {
+  padding-inline: 1rem;
+}
+
+main .accordion.accordion.sub-accordion .accordion-item > :is(h2, h3) > .accordion-trigger {
+  background: none;
+  white-space: unset;
+  color: var(--link-color);
+}
+
+main .accordion.accordion.sub-accordion .accordion-item > :is(h2, h3) > .accordion-trigger::after {
+  right: unset;
+}
+
+main .accordion.accordion.sub-accordion .accordion-item > :is(h2, h3) > .accordion-trigger:hover .accordion-title {
+  text-decoration: underline;
+}
