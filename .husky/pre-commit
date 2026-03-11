@@ -1,1 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged
+
 node .husky/pre-commit.mjs
+
