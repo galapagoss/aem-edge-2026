@@ -14,3 +14,41 @@ indices:
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, "content")
+  article-en:
+    include:
+      - '/en/blog/**'
+    target: /en/article-index.json
+    properties: &article-properties  # this is for reuse, lets use an anchor 
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      publishDate:
+        select: head > meta[name="publish-date"]
+        value: attribute(el, 'content')
+      category:
+        select: head > meta[name="category"]
+        value: attribute(el, 'content')
+      tags:
+        select: head > meta[name="article:tag"]
+        value: attribute(el, 'content')
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, 'content')
+
+  article-es:
+    include:
+      - '/es/blog/**'
+    target: /es/article-index.json
+    properties: *article-properties 
+
+  article-fr:
+    include:
+      - '/fr/blog/**'
+    target: /fr/article-index.json
+    properties: *article-properties
