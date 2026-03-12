@@ -9,8 +9,135 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Menu",
+              "model": "menu"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (Two Column)",
+      "id": "menu-two-column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
               "model": "menu",
-              "classes": []
+              "classes": "two-column"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (Three Column)",
+      "id": "menu-three-column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
+              "model": "menu",
+              "classes": "three-column"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (Three Column, Bottom Row, Image Bottom)",
+      "id": "menu-three-col-bottom-img-bottom",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
+              "model": "menu",
+              "classes": "three-column has-bottom-row card-image-bottom"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (Three Column, Bottom Row, Image Top)",
+      "id": "menu-three-col-bottom-img-top",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
+              "model": "menu",
+              "classes": "three-column has-bottom-row card-image-top"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (Four Column)",
+      "id": "menu-four-column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
+              "model": "menu",
+              "classes": "four-column"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (Four Column, Bottom Row, Image Bottom)",
+      "id": "menu-four-col-bottom-img-bottom",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
+              "model": "menu",
+              "classes": "four-column has-bottom-row card-image-bottom"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (Four Column, Stacked Cards)",
+      "id": "menu-four-col-stacked",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
+              "model": "menu",
+              "classes": "four-column stacked-image-cards"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu (No Promo Card)",
+      "id": "menu-no-promo",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Menu",
+              "model": "menu",
+              "classes": "no-promo-card"
             }
           }
         }
@@ -20,44 +147,7 @@
   "models": [
     {
       "id": "menu",
-      "fields": [
-        {
-          "component": "select",
-          "name": "columns",
-          "label": "Columns",
-          "description": "Number of content columns in the mega-menu. Leave empty for a simple link (no dropdown).",
-          "valueType": "string",
-          "value": "",
-          "options": [
-            { "name": "Simple link (no dropdown)", "value": "" },
-            { "name": "Two columns", "value": "two-column" },
-            { "name": "Three columns", "value": "three-column" },
-            { "name": "Four columns", "value": "four-column" }
-          ]
-        },
-        {
-          "component": "boolean",
-          "name": "hasBottomRow",
-          "label": "Has bottom row",
-          "description": "Show a promo bar at the bottom of the dropdown (AI highlight strip with gradient border).",
-          "valueType": "boolean",
-          "value": false
-        },
-        {
-          "component": "select",
-          "name": "imageCard",
-          "label": "Promo image card",
-          "description": "Style of the promo image column on the right side of the dropdown.",
-          "valueType": "string",
-          "value": "none",
-          "options": [
-            { "name": "None", "value": "none" },
-            { "name": "Image on top", "value": "card-image-top" },
-            { "name": "Image on bottom", "value": "card-image-bottom" },
-            { "name": "Stacked mini-cards", "value": "stacked-image-cards" }
-          ]
-        }
-      ]
+      "fields": []
     },
     {
       "id": "menu-label",
@@ -66,14 +156,8 @@
           "component": "text",
           "name": "label",
           "label": "Tab label",
-          "description": "Text shown in the nav bar. If this menu is a simple link, also fill in the Link field below.",
+          "description": "Text shown in the nav bar. For simple link menus, wrap it in a link using the richtext.",
           "valueType": "string"
-        },
-        {
-          "component": "aem-content",
-          "name": "link",
-          "label": "Link (simple menus only)",
-          "description": "Destination URL. Only used when Columns is set to 'Simple link'."
         }
       ]
     },
@@ -84,28 +168,27 @@
           "component": "text",
           "name": "heading",
           "label": "Column heading",
-          "description": "Bold heading shown at the top of this column (e.g. 'Products', 'Use Cases').",
+          "description": "Bold heading at the top of this dropdown column (e.g. 'Products').",
           "valueType": "string"
         },
         {
           "component": "richtext",
           "name": "items",
           "label": "Items",
-          "description": "List of nav items. Use the list format: each item should have an icon (optional), a link, and a short description on the next line.",
+          "description": "List of nav items. Each item: icon (optional), link, description on next line.",
           "valueType": "string"
-        },
-        {
-          "component": "aem-content",
-          "name": "footerLink",
-          "label": "Footer link",
-          "description": "Optional 'View all …' link shown at the bottom of this column."
         },
         {
           "component": "text",
           "name": "footerLinkText",
           "label": "Footer link text",
-          "description": "Label for the footer link (e.g. 'View all use cases').",
+          "description": "Label for the 'View all\u2026' link at the bottom of this column.",
           "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "footerLink",
+          "label": "Footer link URL"
         }
       ]
     },
@@ -113,30 +196,23 @@
       "id": "menu-bottom-row",
       "fields": [
         {
-          "component": "text",
-          "name": "prefix",
-          "label": "Prefix text",
-          "description": "Plain text before the bold product name (e.g. 'Build digital resilience with').",
+          "component": "richtext",
+          "name": "content",
+          "label": "Bottom row content",
+          "description": "Promo bar content. Use bold for the gradient product name (e.g. 'Build resilience with **Splunk AI**').",
           "valueType": "string"
-        },
-        {
-          "component": "text",
-          "name": "productName",
-          "label": "Product name (bold, gradient)",
-          "description": "Product name rendered with the orange-to-pink gradient (e.g. 'Splunk AI').",
-          "valueType": "string"
-        },
-        {
-          "component": "aem-content",
-          "name": "ctaLink",
-          "label": "CTA link"
         },
         {
           "component": "text",
           "name": "ctaText",
           "label": "CTA text",
-          "description": "Label for the call-to-action link (e.g. 'Learn More').",
+          "description": "Call-to-action label (e.g. 'Learn More').",
           "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "ctaLink",
+          "label": "CTA link URL"
         }
       ]
     },
@@ -146,7 +222,7 @@
         {
           "component": "reference",
           "name": "image",
-          "label": "Image",
+          "label": "Promo image",
           "multi": false
         },
         {
@@ -159,21 +235,21 @@
         {
           "component": "text",
           "name": "heading",
-          "label": "Heading",
-          "description": "Short headline inside the promo card.",
+          "label": "Card heading",
+          "description": "Headline inside the promo card.",
           "valueType": "string"
-        },
-        {
-          "component": "aem-content",
-          "name": "link",
-          "label": "Link"
         },
         {
           "component": "text",
           "name": "linkText",
           "label": "Link text",
-          "description": "CTA text inside the promo card (e.g. 'Explore the product tour').",
+          "description": "CTA label (e.g. 'Explore the product tour').",
           "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link URL"
         }
       ]
     },
@@ -200,15 +276,15 @@
           "valueType": "string"
         },
         {
-          "component": "aem-content",
-          "name": "link",
-          "label": "Link"
-        },
-        {
           "component": "text",
           "name": "linkText",
           "label": "Link text",
           "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link URL"
         }
       ]
     }
