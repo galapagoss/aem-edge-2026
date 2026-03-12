@@ -14,6 +14,28 @@ indices:
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, "content")
+        
+  breadcrumb-en:
+    include:
+      - '/en/**'
+    target: /en/breadcrumb-index.json
+    properties: &breadcrumb-properties
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+
+  breadcrumb-es:
+    include:
+      - '/es/**'
+    target: /es/breadcrumb-index.json
+    properties: *breadcrumb-properties
+
+  breadcrumb-fr:
+    include:
+      - '/fr/**'
+    target: /fr/breadcrumb-index.json
+    properties: *breadcrumb-properties
+    
   article-en:
     include:
       - '/en/blog/**'

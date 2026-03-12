@@ -1,59 +1,52 @@
-import { createElement } from '../../scripts/scripts.js';
+import indexCache from '../../scripts/index-cache.js';
 
-const getPageTitle = async (url) => {
-  const resp = await fetch(url);
-  if (resp.ok) {
-    const html = document.createElement('div');
-    html.innerHTML = await resp.text();
-    return html.querySelector('title').innerText;
-  }
+const buildCrumbs = (pathname, titles) => {
+  const segments = pathname.replace(/^\/|\/$/g, '').split('/');
+  const crumbs = [];
 
-  return '';
-};
+  segments.forEach((segment, i) => {
+    const path = `/${segments.slice(0, i + 1).join('/')}`;
+    const isCurrent = i === segments.length - 1;
+    const label = isCurrent
+      ? document.querySelector('title')?.innerText || segment
+      : titles.get(path) || segment;
 
-const getAllPathsExceptCurrent = async (paths) => {
-  const result = [];
-  // remove first and last slash characters
-  const pathsList = paths.replace(/^\/|\/$/g, '').split('/');
-  for (let i = 0; i < pathsList.length - 1; i += 1) {
-    const pathPart = pathsList[i];
-    const prevPath = result[i - 1] ? result[i - 1].path : '';
-    const path = `${prevPath}/${pathPart}`;
-    const url = `${window.location.origin}${path}`;
-    /* eslint-disable-next-line no-await-in-loop */
-    const name = await getPageTitle(url);
-    if (name) {
-      result.push({ path, name, url });
-    }
-  }
-  return result;
-};
+    crumbs.push({ path, label, current: isCurrent });
+  });
 
-const createLink = (path) => {
-  const pathLink = document.createElement('a');
-  pathLink.href = path.url;
-  pathLink.innerText = path.name;
-  return pathLink;
+  return crumbs;
 };
 
 export default async function decorate(block) {
-  const breadcrumb = createElement('nav', '', {
-    'aria-label': 'Breadcrumb',
-  });
   block.innerHTML = '';
-  const HomeLink = createLink({ path: '', name: 'Home', url: window.location.origin });
-  const breadcrumbLinks = [HomeLink.outerHTML];
 
-  window.setTimeout(async () => {
-    const path = window.location.pathname;
-    const paths = await getAllPathsExceptCurrent(path);
+  // indexCache usa ffetch + index-path internamente,
+  // maneja deduplicación, race conditions y cache automáticamente
+  const data = await indexCache.fetch('breadcrumb');
+  const titles = new Map(data.map(({ path, title }) => [path, title]));
 
-    paths.forEach((pathPart) => breadcrumbLinks.push(createLink(pathPart).outerHTML));
-    const currentPath = document.createElement('span');
-    currentPath.innerText = document.querySelector('title').innerText;
-    breadcrumbLinks.push(currentPath.outerHTML);
+  const crumbs = buildCrumbs(window.location.pathname, titles);
 
-    breadcrumb.innerHTML = breadcrumbLinks.join('<span class="breadcrumb-separator">/</span>');
-    block.append(breadcrumb);
-  }, 1000);
+  const nav = document.createElement('nav');
+  nav.setAttribute('aria-label', 'Breadcrumb');
+  const ol = document.createElement('ol');
+
+  crumbs.forEach(({ path, label, current }) => {
+    const li = document.createElement('li');
+    if (current) {
+      const span = document.createElement('span');
+      span.setAttribute('aria-current', 'page');
+      span.textContent = label;
+      li.append(span);
+    } else {
+      const a = document.createElement('a');
+      a.href = path;
+      a.textContent = label;
+      li.append(a);
+    }
+    ol.append(li);
+  });
+
+  nav.append(ol);
+  block.append(nav);
 }
