@@ -28,8 +28,8 @@ indices:
       image:
         select: head > meta[property="og:image"]
         value: attribute(el, 'content')
-      publishDate:
-        select: head > meta[name="publishDate"]
+      lastModified:
+        select: head > meta[name="lastModified"]
         value: attribute(el, 'content')
       category:
         select: head > meta[name="category"]
