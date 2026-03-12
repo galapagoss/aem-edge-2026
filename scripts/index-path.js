@@ -1,4 +1,4 @@
-const KNOWN_LOCALES = Object.freeze(['en_us', 'de_de', 'fr_fr']);
+const KNOWN_LOCALES = Object.freeze(['en', 'es', 'fr', 'de', 'it', 'ja', 'ko']);
 const DEFAULT_LOCALE = KNOWN_LOCALES[0];
 
 const hasWindow = typeof window !== 'undefined' && typeof window.location === 'object';
@@ -38,7 +38,7 @@ export function resolveLocale(pathname, options = {}) {
     source = window.location.pathname;
   }
   const host = resolveHost(options.host);
-  const isCDN = host && host.includes('splunk.com');
+  const isCDN = host && host.includes('codebay-innovation.com');
   const locale = pickLocaleSegment(source);
 
   const localeValid = KNOWN_LOCALES.includes(locale);
