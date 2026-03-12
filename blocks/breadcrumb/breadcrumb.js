@@ -36,12 +36,12 @@ export default async function decorate(block) {
     if (current) {
       const span = document.createElement('span');
       span.setAttribute('aria-current', 'page');
-      span.textContent = label;
+      span.textContent = label.replace(/\s*\|.*$/, ''); // strip " | EDS POC" suffix if present... This comes from tittle:suffix metadata
       li.append(span);
     } else {
       const a = document.createElement('a');
       a.href = path;
-      a.textContent = label;
+      a.textContent = label.replace(/\s*\|.*$/, ''); // strip " | EDS POC" suffix if present.... This comes from tittle:suffix metadata
       li.append(a);
     }
     ol.append(li);

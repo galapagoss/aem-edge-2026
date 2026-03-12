@@ -43,5 +43,15 @@
       "button",
       "title"
     ]
+  },
+  {
+    "id": "menu",
+    "components": [
+      "menu-label",
+      "menu-column",
+      "menu-bottom-row",
+      "menu-image-col",
+      "menu-stacked-card"
+    ]
   }
 ]
