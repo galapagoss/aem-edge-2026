@@ -2,7 +2,7 @@ import indexCache from '../../scripts/index-cache.js';
 
 const buildCrumbs = (pathname, titles) => {
   const segments = pathname.replace(/^\/|\/$/g, '').split('/');
-  const crumbs = [{ path: '/', label: 'Home', current: false }];
+  const crumbs = [];
 
   segments.forEach((segment, i) => {
     const path = `/${segments.slice(0, i + 1).join('/')}`;
