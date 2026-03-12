@@ -50,7 +50,11 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "quote",
+        "accordion",
+        "breadcrumb",
+        "article-hero"
       ]
     }
   ]

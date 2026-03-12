@@ -38,6 +38,23 @@
 
   /* nav height */
   --nav-height: 64px;
+
+   /* spacing scale — used by article-hero and other Splunk blocks */
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+  --gap-xl: 32px;
+  --gap-xxl: 48px;
+
+  /* layout */
+  --max-content-width: 1200px;
+
+  /* article hero */
+  --banner-background-color: var(--light-color);
+  --promo-background-color: #e8e8e8;
+  --pill-radius: 100px;
+  --radius-sm: 8px;
 }
 
 /* fallback fonts */
@@ -255,3 +272,5 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+

@@ -1,0 +1,39 @@
+{
+  "definitions": [
+    {
+      "title": "Breadcrumb Section",
+      "id": "breadcrumb-section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Breadcrumb Section",
+              "model": "breadcrumb-section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "breadcrumb-section",
+      "fields": [
+        {
+          "component": "boolean",
+          "name": "icon",
+          "label": "Show homepage icon",
+          "valueType": "boolean"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "basePrefix",
+          "label": "Base Url prefix"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

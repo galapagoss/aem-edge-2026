@@ -142,6 +142,44 @@
     ]
   },
   {
+    "id": "accordion",
+    "fields": []
+  },
+  {
+    "id": "breadcrumb-section",
+    "fields": [
+      {
+        "component": "boolean",
+        "name": "icon",
+        "label": "Show homepage icon",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "basePrefix",
+        "label": "Base Url prefix"
+      }
+    ]
+  },
+  {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "boolean",
+        "name": "icon",
+        "label": "Show homepage icon",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "basePrefix",
+        "label": "Base Url prefix"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -218,21 +256,21 @@
   {
     "id": "quote",
     "fields": [
-       {
-         "component": "richtext",
-         "name": "quote",
-         "value": "",
-         "label": "Quote",
-         "valueType": "string"
-       },
-       {
-         "component": "text",
-         "valueType": "string",
-         "name": "author",
-         "label": "Author",
-         "value": ""
-       },
-       {
+      {
+        "component": "richtext",
+        "name": "quote",
+        "value": "",
+        "label": "Quote",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "author",
+        "label": "Author",
+        "value": ""
+      },
+      {
         "component": "select",
         "name": "classes",
         "value": "",
@@ -254,45 +292,6 @@
           }
         ]
       }
-     ]
-  },
-  {
-    "id": "breadcrumb",
-    "fields": [
-      {
-         "component": "boolean",
-         "name": "icon",
-         "label": "Show homepage icon",
-         "valueType": "boolean"
-       },
-      {
-         "component": "text",
-         "valueType": "string",
-         "name": "basePrefix",
-         "label": "Base Url prefix"
-       }
-     ]
-  },
-  {
-    "id": "breadcrumb-section",
-    "fields": [
-      {
-         "component": "boolean",
-         "name": "icon",
-         "label": "Show homepage icon",
-         "valueType": "boolean"
-       },
-      {
-         "component": "text",
-         "valueType": "string",
-         "name": "basePrefix",
-         "label": "Base Url prefix"
-       }
-     ]
-  },
-  {
-    "id": "accordion",
-    "fields": [
-     ]
+    ]
   }
 ]
