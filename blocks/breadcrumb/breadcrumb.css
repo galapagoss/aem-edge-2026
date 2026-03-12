@@ -1,31 +1,40 @@
-main > .breadcrumb-container {
-  padding: 10px;
-  grid-row: 1;
-  grid-column: 1;
+.breadcrumb {
+  font-size: 0.875rem;
+  padding: 0.5rem 0;
 }
 
-.blog main div.breadcrumb-container {
-  padding: 10px;
+.breadcrumb nav ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.breadcrumb > nav {
-  color: var(--link-color);
-  font-size: var(--body-font-size-xs);
-  padding-left: 10px;
-  min-height: 26px;
+.breadcrumb nav ol li {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.breadcrumb > nav a {
+/* separator via CSS, no extra DOM nodes */
+.breadcrumb nav ol li + li::before {
+  content: '/';
+  color: var(--color-text-muted, #666);
+}
+
+.breadcrumb nav ol li a {
+  color: var(--link-color, #0070f3);
   text-decoration: none;
 }
 
-.breadcrumb .breadcrumb-separator {
-  margin-inline: 1.5ch;
+.breadcrumb nav ol li a:hover {
+  text-decoration: underline;
 }
 
-@media (width >= 900px) {
-  main .breadcrumb-container {
-    grid-row: 1;
-    grid-column: 1 / span 2;
-  }
+.breadcrumb nav ol li span[aria-current='page'] {
+  color: var(--color-text, #333);
+  font-weight: 500;
 }
