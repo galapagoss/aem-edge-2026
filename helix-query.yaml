@@ -17,6 +17,8 @@ indices:
   article-en:
     include:
       - '/en/blog/**'
+    exclude:
+      - '/en/blog'
     target: /en/article-index.json
     properties: &article-properties  # this is for reuse, lets use an anchor 
       title:
@@ -44,11 +46,15 @@ indices:
   article-es:
     include:
       - '/es/blog/**'
+    exclude:
+      - '/es/blog'
     target: /es/article-index.json
     properties: *article-properties 
 
   article-fr:
     include:
       - '/fr/blog/**'
+    exclude:
+      - '/fr/blog'
     target: /fr/article-index.json
     properties: *article-properties
