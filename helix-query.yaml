@@ -19,7 +19,7 @@ indices:
     include:
       - '/en/**'
     exclude:
-      - '/en/**/**.json'
+      - '/en/**.json'
     target: /en/breadcrumb-index.json
     properties: &breadcrumb-properties
       title:
@@ -30,7 +30,7 @@ indices:
     include:
       - '/es/**'
     exclude:
-      - '/es/**/**.json'
+      - '/es/**.json'
     target: /es/breadcrumb-index.json
     properties: *breadcrumb-properties
 
@@ -38,7 +38,7 @@ indices:
     include:
       - '/fr/**'
     exclude:
-      - '/fr/**/**.json'
+      - '/fr/**.json'
     target: /fr/breadcrumb-index.json
     properties: *breadcrumb-properties
     
