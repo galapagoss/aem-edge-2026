@@ -79,6 +79,25 @@ const PAGE_PARAM = 'p';
  */
 const getRowText = (row) => row?.querySelector(':scope > div')?.textContent?.trim() ?? '';
 
+/**
+ * Gets the href of the first <a> inside a row (aem-content field).
+ * @param {Element|undefined} row
+ * @returns {string}
+ */
+const getRowHref = (row) => row?.querySelector('a')?.getAttribute('href')?.trim() ?? '';
+
+/**
+ * Gets all hrefs from <a> elements inside a row (aem-content multi field).
+ * @param {Element|undefined} row
+ * @returns {string[]}
+ */
+const getRowHrefs = (row) => {
+  if (!row) return [];
+  return [...row.querySelectorAll('a')]
+    .map((anchor) => anchor.getAttribute('href')?.trim())
+    .filter(Boolean);
+};
+
 // ---------------------------------------------------------------------------
 // General helpers (unchanged from original)
 // ---------------------------------------------------------------------------
@@ -676,84 +695,48 @@ function isBlockEager(block) {
 export default async function decorate(block) {
   const rows = [...block.children];
 
-  // UE omits rows for empty aem-content fields, so positional destructuring breaks.
-  // Instead, identify each row by its value matching known select options or by
-  // whether it contains <a> elements (aem-content fields).
+  // Destructure positionally — order must match _article-list.json exactly
+  const [
+    displayModeRow, // 0  displayMode            (select)
+    titleRow, // 1  title                  (text)
+    filterRow, // 2  filter                 (select)
+    tagsRow, // 3  tags                   (text, comma-separated)
+    authorUrlRow, // 4  authorUrl              (aem-content)
+    pathsRow, // 5  paths                  (aem-content, multi)
+    sortRow, // 6  sort                   (select)
+    shuffleRow, // 7  sortCategoryShuffleOrder (select)
+    limitRow, // 8  limit                  (select)
+    blogLimitRow, // 9  blogLimit              (select)
+    descriptionWordLimitRow, // 10 descriptionWordLimit   (select)
+    showImagesRow, // 11 showImagesOnMobile     (select)
+    hidePaginationRow, // 12 hidePagination         (select)
+    // classesRow (13) is auto-applied as CSS class by the framework — no need to read it
+  ] = rows;
 
-  const DISPLAY_MODES = ['paginated', 'carousel'];
-  const FILTER_MODES = ['tags', 'category', 'paths'];
-  const SORT_MODES = ['date-desc', 'date-asc'];
-  const LIMIT_VALUES = ['3', '6', '9', '12'];
-  const BLOG_LIMIT_VALUES = ['0', '3', '6', '9', '12', '24'];
-  const WORD_LIMIT_VALUES = ['20', '30', '40', '50'];
-
+  // Build raw config object from rows
+  // Key names match what normalizeConfig reads (lowercase, no camelCase)
   const rawConfig = {
-    displaymode: 'paginated',
-    title: '',
-    filter: '',
-    tags: '',
-    authorurl: '',
-    paths: [],
-    sort: 'date-desc',
-    'sort-category-shuffle-order': 'false',
-    limit: '9',
-    'blog-limit': '0',
-    descriptionwordlimit: '0',
-    showimagesonmobile: 'true',
-    hidepagination: 'false',
+    displaymode: getRowText(displayModeRow),
+    title: getRowText(titleRow),
+    filter: getRowText(filterRow),
+    tags: getRowText(tagsRow), // comma-separated string → toArray() in normalizeConfig
+    authorurl: getRowHref(authorUrlRow),
+    paths: getRowHrefs(pathsRow), // string[] from multi aem-content
+    sort: getRowText(sortRow),
+    'sort-category-shuffle-order': getRowText(shuffleRow),
+    limit: getRowText(limitRow),
+    'blog-limit': getRowText(blogLimitRow),
+    descriptionwordlimit: getRowText(descriptionWordLimitRow),
+    showimagesonmobile: getRowText(showImagesRow),
+    hidepagination: getRowText(hidePaginationRow),
+    // classesRow is auto-applied by the framework — no need to read it
   };
 
-  // Tracking sets to handle repeated boolean/numeric values in correct order
-  const seen = new Set();
-
-  rows.forEach((row) => {
-    const links = [...row.querySelectorAll('a')];
-    const text = getRowText(row);
-
-    // aem-content rows: contain <a> elements — authorUrl (single) or paths (multiple)
-    if (links.length > 0) {
-      const hrefs = links.map((link) => link.getAttribute('href')).filter(Boolean);
-      if (hrefs.length === 1 && !rawConfig.authorurl) {
-        const [firstHref] = hrefs;
-        rawConfig.authorurl = firstHref;
-      } else {
-        rawConfig.paths = hrefs;
-      }
-      return;
-    }
-
-    // select rows: match by known option values
-    if (DISPLAY_MODES.includes(text)) { rawConfig.displaymode = text; return; }
-    if (FILTER_MODES.includes(text)) { rawConfig.filter = text; return; }
-    if (SORT_MODES.includes(text)) { rawConfig.sort = text; return; }
-    if (text === 'true' || text === 'false') {
-      if (!seen.has('shuffle')) {
-        rawConfig['sort-category-shuffle-order'] = text;
-        seen.add('shuffle');
-        return;
-      }
-      if (!seen.has('mobile')) {
-        rawConfig.showimagesonmobile = text;
-        seen.add('mobile');
-        return;
-      }
-      rawConfig.hidepagination = text;
-      return;
-    }
-    if (LIMIT_VALUES.includes(text) && !seen.has('limit')) {
-      rawConfig.limit = text; seen.add('limit'); return;
-    }
-    if (BLOG_LIMIT_VALUES.includes(text) && !seen.has('blogLimit')) {
-      rawConfig['blog-limit'] = text; seen.add('blogLimit'); return;
-    }
-    if (WORD_LIMIT_VALUES.includes(text)) {
-      rawConfig.descriptionwordlimit = text; return;
-    }
-
-    // free-text rows: first = title, second = tags
-    if (!rawConfig.title) { rawConfig.title = text; return; }
-    if (!rawConfig.tags) { rawConfig.tags = text; }
-  });
+  // DEBUG — remove after fixing
+  // eslint-disable-next-line no-console
+  console.log('[article-list] pathsRow element:', pathsRow);
+  // eslint-disable-next-line no-console
+  console.log('[article-list] pathsRow raw hrefs:', rawConfig.paths);
 
   // Remove all rows — the decorator builds its own DOM
   rows.forEach((row) => row.remove());
