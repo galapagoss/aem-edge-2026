@@ -278,7 +278,13 @@ const isArticleTemplate = (entry) => {
   if (!entry || typeof entry !== 'object') return false;
   let template = entry.template ?? entry.Template ?? '';
   if (Array.isArray(template)) [template] = template;
-  return `${template || ''}`.trim().toLowerCase() === 'article';
+  const value = `${template || ''}`.trim().toLowerCase();
+  // Accept 'article' explicitly, OR empty template (blog index entries without template set)
+  // Exclude index/root paths (e.g. /es/blog) which have no path segments after /blog
+  if (value !== 'article' && value !== '') return false;
+  const pathSegments = (entry.path || '').split('/').filter(Boolean);
+  const blogIdx = pathSegments.indexOf('blog');
+  return blogIdx === -1 || pathSegments.length > blogIdx + 1;
 };
 
 // ---------------------------------------------------------------------------
@@ -663,12 +669,6 @@ async function renderArticleList(block, config) {
   const state = {
     currentPage, pageSize: config.limit, totalPages, articles: filtered, config, pagedRoot: grid,
   };
-  // DEBUG — quitar después
-  console.log('[article-list] config:', config);
-  console.log('[article-list] all entries from index:', all.length, all[0]);
-  const articleEntries = all.filter((entry) => isArticleTemplate(entry));
-  console.log('[article-list] after isArticleTemplate filter:', articleEntries.length);
-  console.log('[article-list] after filterArticles:', filtered.length);
   renderPage(state);
   buildPagination(block, state, placeholders);
   block.classList.add('loaded');
