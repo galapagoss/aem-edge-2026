@@ -294,6 +294,11 @@ const filterArticles = (all, cfg) => {
   let base = all;
   if (cfg.paths.length) {
     const configuredPaths = new Set(cfg.paths);
+    // DEBUG — remove after fixing
+    // eslint-disable-next-line no-console
+    console.log('[article-list] filtering by paths (normalized):', [...configuredPaths]);
+    // eslint-disable-next-line no-console
+    base.forEach((art) => console.log('  article comparable path:', toComparablePath(art.path), '| raw:', art.path));
     base = base.filter((article) => {
       const candidates = [];
       if (article.path) candidates.push(article.path);
@@ -726,6 +731,12 @@ export default async function decorate(block) {
     hidepagination: getRowText(hidePaginationRow),
     // classesRow is auto-applied by the framework — no need to read it
   };
+
+  // DEBUG — remove after fixing
+  // eslint-disable-next-line no-console
+  console.log('[article-list] pathsRow element:', pathsRow);
+  // eslint-disable-next-line no-console
+  console.log('[article-list] pathsRow raw hrefs:', rawConfig.paths);
 
   // Remove all rows — the decorator builds its own DOM
   rows.forEach((row) => row.remove());
