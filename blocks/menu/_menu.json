@@ -151,6 +151,81 @@
           }
         }
       }
+    },
+    {
+      "title": "Menu Label",
+      "id": "menu-label",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Menu Label",
+              "model": "menu-label"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu Column",
+      "id": "menu-column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Menu Column",
+              "model": "menu-column"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu Bottom Row",
+      "id": "menu-bottom-row",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Menu Bottom Row",
+              "model": "menu-bottom-row"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu Image Column",
+      "id": "menu-image-col",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Menu Image Column",
+              "model": "menu-image-col"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu Stacked Card",
+      "id": "menu-stacked-card",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Menu Stacked Card",
+              "model": "menu-stacked-card"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
