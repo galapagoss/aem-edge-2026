@@ -1,0 +1,68 @@
+{
+  "definitions": [
+    {
+      "title": "Article List",
+      "id": "article-list",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Article List",
+              "model": "article-list"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "article-list",
+      "fields": [
+        {
+          "component": "select",
+          "name": "displayMode",
+          "label": "Display Mode",
+          "valueType": "string",
+          "value": "paginated",
+          "options": [
+            { "name": "Paginated (Default)", "value": "paginated" },
+            { "name": "Carousel", "value": "carousel" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Section Title",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "name": "sort",
+          "label": "Sort Order",
+          "valueType": "string",
+          "value": "date-desc",
+          "options": [
+            { "name": "Newest First (Default)", "value": "date-desc" },
+            { "name": "Oldest First", "value": "date-asc" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Visual Style",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "Compact", "value": "compact" },
+            { "name": "Featured", "value": "featured" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
