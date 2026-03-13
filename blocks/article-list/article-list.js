@@ -5,17 +5,7 @@
 // Row order MUST match _article-list.json field order:
 //   0  displayMode            (select)
 //   1  title                  (text)
-//   2  filter                 (select)
-//   3  tags                   (text)      ← comma-separated
-//   4  authorUrl              (aem-content)
-//   5  paths                  (aem-content, multi)
 //   6  sort                   (select)
-//   7  sortCategoryShuffleOrder (select)
-//   8  limit                  (select)
-//   9  blogLimit              (select)
-//  10  descriptionWordLimit   (select)
-//  11  showImagesOnMobile     (select)
-//  12  hidePagination         (select)
 //  13  classes                (select)   ← auto-applied as CSS class, just remove
 
 import indexCache from '../../scripts/index-cache.js';
@@ -78,25 +68,6 @@ const PAGE_PARAM = 'p';
  * @returns {string}
  */
 const getRowText = (row) => row?.querySelector(':scope > div')?.textContent?.trim() ?? '';
-
-/**
- * Gets the href of the first <a> inside a row (aem-content field).
- * @param {Element|undefined} row
- * @returns {string}
- */
-const getRowHref = (row) => row?.querySelector('a')?.getAttribute('href')?.trim() ?? '';
-
-/**
- * Gets all hrefs from <a> elements inside a row (aem-content multi field).
- * @param {Element|undefined} row
- * @returns {string[]}
- */
-const getRowHrefs = (row) => {
-  if (!row) return [];
-  return [...row.querySelectorAll('a')]
-    .map((anchor) => anchor.getAttribute('href')?.trim())
-    .filter(Boolean);
-};
 
 // ---------------------------------------------------------------------------
 // General helpers (unchanged from original)
@@ -227,37 +198,30 @@ const authorUrlMatches = (needle, candidates) => {
 };
 
 // ---------------------------------------------------------------------------
-// Config normalizer
-// Receives a plain object built from positional rows (not readBlockConfig).
-// Key names match what normalizeConfig already reads so no further changes needed.
+// Config normalizer — 4 authored fields: displayMode, title, sort, classes
 // ---------------------------------------------------------------------------
 const normalizeConfig = (raw) => {
   const cfg = raw || {};
-  let { paths } = cfg;
-  if (!Array.isArray(paths)) paths = paths ? [paths] : [];
-  paths = paths.map((p) => toComparablePath(p)).filter(Boolean);
-
   return {
-    displayMode: (cfg.displaymode || cfg.mode || 'paginated').toLowerCase(),
+    displayMode: (cfg.displaymode || 'paginated').toLowerCase(),
     title: (cfg.title || '').trim(),
-    tags: toArray(cfg.tags),
-    author: '', // not exposed in UE model — filter by authorUrl only
-    authorUrl: (cfg.authorurl || '').trim(),
-    category: '', // resolved from page metadata at runtime
-    paths,
-    filter: (cfg.filter || '').trim().toLowerCase(),
     sort: (cfg.sort || 'date-desc').trim().toLowerCase(),
-    sortCategoryOrder: [], // not exposed in UE model — hardcode if needed
-    sortCategoryShuffleOrder: ['true', 'yes', '1', 'on'].includes(
-      (cfg['sort-category-shuffle-order'] || '').toLowerCase(),
-    ),
-    limit: parseInt(cfg.limit || '9', 10) || 9,
-    blogLimit: parseInt(cfg['blog-limit'] || '0', 10),
-    showImagesOnMobile: !['false', 'no', '0', 'off'].includes((cfg.showimagesonmobile || '').toLowerCase()),
+    // Remaining config is hardcoded — extend here if needed in the future
+    tags: [],
+    author: '',
+    authorUrl: '',
+    category: '',
+    paths: [],
+    filter: '',
+    sortCategoryOrder: [],
+    sortCategoryShuffleOrder: false,
+    limit: 9,
+    blogLimit: 0,
+    showImagesOnMobile: true,
     prevText: 'Prev',
     nextText: 'Next',
-    descriptionWordLimit: parseInt(cfg.descriptionwordlimit || '0', 10) || 0,
-    hidePagination: ['true', 'yes', '1', 'on'].includes((cfg.hidepagination || '').toLowerCase()),
+    descriptionWordLimit: 0,
+    hidePagination: false,
   };
 };
 
@@ -366,9 +330,13 @@ const shuffleArray = (array) => {
 
 const sortArticles = (list, cfg) => {
   if (!list || list.length <= 1) return [...list];
+  const toMs = (item) => {
+    const raw = item.lastModified || item.publishedTime || item.publishDate || item.date || 0;
+    return new Date(raw).getTime();
+  };
   const byDate = (itemA, itemB) => {
-    const da = new Date(itemA.publishDate || itemA.date || 0).getTime();
-    const db = new Date(itemB.publishDate || itemB.date || 0).getTime();
+    const da = toMs(itemA);
+    const db = toMs(itemB);
     return cfg.sort === 'date-asc' ? da - db : db - da;
   };
   if (cfg.sortCategoryShuffleOrder) return list.length > 1 ? shuffleArray(list) : [...list];
@@ -695,48 +663,30 @@ function isBlockEager(block) {
 export default async function decorate(block) {
   const rows = [...block.children];
 
-  // Destructure positionally — order must match _article-list.json exactly
-  const [
-    displayModeRow, // 0  displayMode            (select)
-    titleRow, // 1  title                  (text)
-    filterRow, // 2  filter                 (select)
-    tagsRow, // 3  tags                   (text, comma-separated)
-    authorUrlRow, // 4  authorUrl              (aem-content)
-    pathsRow, // 5  paths                  (aem-content, multi)
-    sortRow, // 6  sort                   (select)
-    shuffleRow, // 7  sortCategoryShuffleOrder (select)
-    limitRow, // 8  limit                  (select)
-    blogLimitRow, // 9  blogLimit              (select)
-    descriptionWordLimitRow, // 10 descriptionWordLimit   (select)
-    showImagesRow, // 11 showImagesOnMobile     (select)
-    hidePaginationRow, // 12 hidePagination         (select)
-    // classesRow (13) is auto-applied as CSS class by the framework — no need to read it
-  ] = rows;
+  // Model has 4 fields: displayMode, title, sort, classes.
+  // classes is auto-applied as a CSS class by the framework — we only need to read
+  // displayMode, title, and sort. Match rows by their known select values.
 
-  // Build raw config object from rows
-  // Key names match what normalizeConfig reads (lowercase, no camelCase)
+  const DISPLAY_MODES = ['paginated', 'carousel'];
+  const SORT_MODES = ['date-desc', 'date-asc'];
+  // Known classes values — must be excluded from the title free-text fallback
+  const CLASS_VALUES = ['compact', 'featured'];
+
   const rawConfig = {
-    displaymode: getRowText(displayModeRow),
-    title: getRowText(titleRow),
-    filter: getRowText(filterRow),
-    tags: getRowText(tagsRow), // comma-separated string → toArray() in normalizeConfig
-    authorurl: getRowHref(authorUrlRow),
-    paths: getRowHrefs(pathsRow), // string[] from multi aem-content
-    sort: getRowText(sortRow),
-    'sort-category-shuffle-order': getRowText(shuffleRow),
-    limit: getRowText(limitRow),
-    'blog-limit': getRowText(blogLimitRow),
-    descriptionwordlimit: getRowText(descriptionWordLimitRow),
-    showimagesonmobile: getRowText(showImagesRow),
-    hidepagination: getRowText(hidePaginationRow),
-    // classesRow is auto-applied by the framework — no need to read it
+    displaymode: 'paginated',
+    title: '',
+    sort: 'date-desc',
   };
 
-  // DEBUG — remove after fixing
-  // eslint-disable-next-line no-console
-  console.log('[article-list] pathsRow element:', pathsRow);
-  // eslint-disable-next-line no-console
-  console.log('[article-list] pathsRow raw hrefs:', rawConfig.paths);
+  rows.forEach((row) => {
+    const text = getRowText(row);
+    if (DISPLAY_MODES.includes(text)) { rawConfig.displaymode = text; return; }
+    if (SORT_MODES.includes(text)) { rawConfig.sort = text; return; }
+    // Skip classes values — already applied to block element by the framework
+    if (CLASS_VALUES.includes(text) || text === '') return;
+    // Remaining free text = title
+    if (!rawConfig.title) { rawConfig.title = text; }
+  });
 
   // Remove all rows — the decorator builds its own DOM
   rows.forEach((row) => row.remove());

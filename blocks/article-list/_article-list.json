@@ -40,40 +40,6 @@
         },
         {
           "component": "select",
-          "name": "filter",
-          "label": "Filter Mode",
-          "valueType": "string",
-          "value": "",
-          "options": [
-            { "name": "None (All Articles)", "value": "" },
-            { "name": "By Tag", "value": "tags" },
-            { "name": "By Category (Current Page)", "value": "category" },
-            { "name": "By Specific Paths", "value": "paths" }
-          ]
-        },
-        {
-          "component": "text",
-          "name": "tags",
-          "label": "Tags (comma-separated)",
-          "valueType": "string",
-          "value": "",
-          "description": "Filter articles by tag. Separate multiple tags with commas. E.g.: security, cloud"
-        },
-        {
-          "component": "aem-content",
-          "name": "authorUrl",
-          "label": "Author Page URL",
-          "description": "Filter articles by author. Select the author's profile page."
-        },
-        {
-          "component": "aem-content",
-          "name": "paths",
-          "label": "Specific Article Paths",
-          "multi": true,
-          "description": "Only used when Filter Mode is set to 'By Specific Paths'."
-        },
-        {
-          "component": "select",
           "name": "sort",
           "label": "Sort Order",
           "valueType": "string",
@@ -81,82 +47,6 @@
           "options": [
             { "name": "Newest First (Default)", "value": "date-desc" },
             { "name": "Oldest First", "value": "date-asc" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "sortCategoryShuffleOrder",
-          "label": "Shuffle Results",
-          "valueType": "string",
-          "value": "false",
-          "options": [
-            { "name": "No (Default)", "value": "false" },
-            { "name": "Yes (Random Order)", "value": "true" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "limit",
-          "label": "Articles Per Page",
-          "valueType": "string",
-          "value": "9",
-          "options": [
-            { "name": "3", "value": "3" },
-            { "name": "6", "value": "6" },
-            { "name": "9 (Default)", "value": "9" },
-            { "name": "12", "value": "12" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "blogLimit",
-          "label": "Max Total Articles",
-          "valueType": "string",
-          "value": "0",
-          "description": "Hard cap on total articles shown (0 = no cap).",
-          "options": [
-            { "name": "No Limit (Default)", "value": "0" },
-            { "name": "3", "value": "3" },
-            { "name": "6", "value": "6" },
-            { "name": "9", "value": "9" },
-            { "name": "12", "value": "12" },
-            { "name": "24", "value": "24" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "descriptionWordLimit",
-          "label": "Truncate Description (words)",
-          "valueType": "string",
-          "value": "0",
-          "options": [
-            { "name": "No Truncation (Default)", "value": "0" },
-            { "name": "20 words", "value": "20" },
-            { "name": "30 words", "value": "30" },
-            { "name": "40 words", "value": "40" },
-            { "name": "50 words", "value": "50" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "showImagesOnMobile",
-          "label": "Show Images on Mobile",
-          "valueType": "string",
-          "value": "true",
-          "options": [
-            { "name": "Yes (Default)", "value": "true" },
-            { "name": "No", "value": "false" }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "hidePagination",
-          "label": "Hide Pagination",
-          "valueType": "string",
-          "value": "false",
-          "options": [
-            { "name": "No — Show Pagination (Default)", "value": "false" },
-            { "name": "Yes — Hide Pagination", "value": "true" }
           ]
         },
         {
