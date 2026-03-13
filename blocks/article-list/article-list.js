@@ -663,6 +663,12 @@ async function renderArticleList(block, config) {
   const state = {
     currentPage, pageSize: config.limit, totalPages, articles: filtered, config, pagedRoot: grid,
   };
+  // DEBUG — quitar después
+  console.log('[article-list] config:', config);
+  console.log('[article-list] all entries from index:', all.length, all[0]);
+  const articleEntries = all.filter((entry) => isArticleTemplate(entry));
+  console.log('[article-list] after isArticleTemplate filter:', articleEntries.length);
+  console.log('[article-list] after filterArticles:', filtered.length);
   renderPage(state);
   buildPagination(block, state, placeholders);
   block.classList.add('loaded');
