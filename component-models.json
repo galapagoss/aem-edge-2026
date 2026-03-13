@@ -264,7 +264,7 @@
         "component": "text",
         "name": "label",
         "label": "Tab label",
-        "description": "Text shown in the nav bar. For simple link menus, wrap it in a link using the richtext.",
+        "description": "Text shown in the nav bar. For a simple link tab (no dropdown), prefix with a link: [Pricing](/pricing)",
         "valueType": "string"
       }
     ]
@@ -273,30 +273,11 @@
     "id": "menu-column",
     "fields": [
       {
-        "component": "text",
-        "name": "heading",
-        "label": "Column heading",
-        "description": "Bold heading at the top of this dropdown column (e.g. 'Products').",
-        "valueType": "string"
-      },
-      {
         "component": "richtext",
-        "name": "items",
-        "label": "Items",
-        "description": "List of nav items. Each item: icon (optional), link, description on next line.",
+        "name": "content",
+        "label": "Column content",
+        "description": "Full column content. Start with **Heading** in bold, then a list of items (icon, link, description), end with a bold link for 'View all…'",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "footerLinkText",
-        "label": "Footer link text",
-        "description": "Label for the 'View all…' link at the bottom of this column.",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "name": "footerLink",
-        "label": "Footer link URL"
       }
     ]
   },
@@ -307,20 +288,8 @@
         "component": "richtext",
         "name": "content",
         "label": "Bottom row content",
-        "description": "Promo bar content. Use bold for the gradient product name (e.g. 'Build resilience with **Splunk AI**').",
+        "description": "Promo bar text. Use bold for the gradient product name, e.g. 'Hello !'",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "ctaText",
-        "label": "CTA text",
-        "description": "Call-to-action label (e.g. 'Learn More').",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "name": "ctaLink",
-        "label": "CTA link URL"
       }
     ]
   },
@@ -328,36 +297,11 @@
     "id": "menu-image-col",
     "fields": [
       {
-        "component": "reference",
-        "name": "image",
-        "label": "Promo image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "valueType": "string",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "heading",
-        "label": "Card heading",
-        "description": "Headline inside the promo card.",
+        "component": "richtext",
+        "name": "content",
+        "label": "Image column content",
+        "description": "Heading, link and image for the promo card. Image can be above or below depending on the block variant.",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Link text",
-        "description": "CTA label (e.g. 'Explore the product tour').",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link URL"
       }
     ]
   },
@@ -365,34 +309,11 @@
     "id": "menu-stacked-card",
     "fields": [
       {
-        "component": "reference",
-        "name": "image",
-        "label": "Card image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "valueType": "string",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "title",
-        "label": "Card title",
+        "component": "richtext",
+        "name": "content",
+        "label": "Stacked card content",
+        "description": "One card: image, title text, and a link.",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Link text",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link URL"
       }
     ]
   },
