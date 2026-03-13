@@ -1,0 +1,12 @@
+<svg width="850" height="400" viewBox="0 0 850 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M120 320L180 80H220L280 320H235L222 260H178L165 320H120ZM185 225H215L200 150L185 225Z" fill="black"/>
+  <path d="M110 240C110 240 140 180 200 180C260 180 300 230 300 230L290 250C290 250 255 205 200 205C145 205 125 255 125 255L110 240Z" fill="black"/>
+  <rect x="250" y="80" width="15" height="15" fill="black"/>
+  <rect x="275" y="65" width="15" height="15" fill="black"/>
+
+  <text x="330" y="190" font-family="Arial, sans-serif" font-weight="bold" font-size="110" fill="black">EDS/Adobe</text>
+  
+  <text x="335" y="290" font-family="Arial, sans-serif" font-size="65" fill="black">Powered by Globant</text>
+  
+  <path d="M780 245L815 285L780 325L795 325L830 285L795 245H780Z" fill="black"/>
+</svg>

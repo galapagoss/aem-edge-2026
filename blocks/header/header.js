@@ -228,10 +228,22 @@ function initDropdownSections(navSections) {
 
     cols.forEach((c) => c.classList.add('dropdown-col'));
 
-    // ── List items → .dropdown-item-wrapper ──────────────────────────────
+    // ── List items → .dropdown-item-wrapper (supports simple lists) ──────
     menu.querySelectorAll('li').forEach((li) => {
-      const ul = li.querySelector('ul');
-      if (!ul) return;
+      let ul = li.querySelector('ul');
+
+      // If this is a simple list item with no nested <ul>, wrap its content
+      // so it matches the expected structure: <li><ul><li>Label</li></ul></li>
+      if (!ul) {
+        const content = Array.from(li.childNodes);
+        if (!content.length) return;
+        const labelLi = document.createElement('li');
+        content.forEach((node) => labelLi.appendChild(node));
+        ul = document.createElement('ul');
+        ul.appendChild(labelLi);
+        li.appendChild(ul);
+      }
+
       li.classList.add('dropdown-item-wrapper');
       const [labelEl, descEl] = Array.from(ul.children);
       if (labelEl) labelEl.classList.add('dropdown-item-label');
@@ -240,9 +252,10 @@ function initDropdownSections(navSections) {
 
     // Unwrap unnecessary inner divs in dropdown columns
     children.forEach((wrapper, i) => {
-      const inner = wrapper.querySelector('div');
-      if (inner && i > 0 && !wrapper.classList.contains('image-col')) {
-        inner.replaceWith(...inner.childNodes);
+      if (i === 0 || wrapper.classList.contains('image-col')) return;
+      const directChildren = Array.from(wrapper.children);
+      if (directChildren.length === 1 && directChildren[0].tagName === 'DIV') {
+        directChildren[0].replaceWith(...directChildren[0].childNodes);
       }
     });
 
