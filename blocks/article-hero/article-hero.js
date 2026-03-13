@@ -1,10 +1,10 @@
-import { getMetadata, createOptimizedPicture } from '../../../scripts/aem.js';
+import { getMetadata, createOptimizedPicture } from '../../scripts/aem.js';
 import {
   formatDate, toTitleCase, slug, getBlogHomePath,
-} from '../../../scripts/util.js';
+} from '../../scripts/util.js';
 import {
   div, a, h1, span, domEl,
-} from '../../../scripts/dom-helpers.js';
+} from '../../scripts/dom-helpers.js';
 
 export default async function decorate(block) {
   const title = getMetadata('og:title') || document.title || '';
