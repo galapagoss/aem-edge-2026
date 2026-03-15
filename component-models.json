@@ -25,7 +25,6 @@
         "component": "text",
         "valueType": "string",
         "name": "authorcreator",
-        "multi": true,
         "label": "authorcreator"
       }
     ]
