@@ -34,16 +34,26 @@
           "valueType": "string"
         },
         {
-          "component": "button",
-          "name": "button",
-          "label": "Learn More Button",
-          "valueType": "object"
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image Reference",
+          "multi": false
         },
         {
-          "component": "image",
-          "name": "image",
-          "label": "Banner Image",
-          "valueType": "object"
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },
+        {
+          "component": "text",
+          "name": "linkText",
+          "label": "Text"
+        },
+        {
+          "component": "text",
+          "name": "linkTitle",
+          "label": "Title"
         }
       ]
     }
