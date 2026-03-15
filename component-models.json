@@ -213,6 +213,36 @@
     ]
   },
   {
+    "id": "banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "name": "body",
+        "value": "",
+        "label": "Body Text",
+        "valueType": "string"
+      },
+      {
+        "component": "button",
+        "name": "button",
+        "label": "Learn More Button",
+        "valueType": "object"
+      },
+      {
+        "component": "image",
+        "name": "image",
+        "label": "Banner Image",
+        "valueType": "object"
+      }
+    ]
+  },
+  {
     "id": "breadcrumb-section",
     "fields": [
       {
