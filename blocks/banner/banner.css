@@ -1,40 +1,147 @@
-.breadcrumb {
-  font-size: 0.875rem;
-  padding: 0.5rem 0;
-}
-
-.breadcrumb nav ol {
+.banner {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: var(--light-color, #f5f5f5);
+  min-height: 300px;
 }
 
-.breadcrumb nav ol li {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+.banner.has-image {
+  color: var(--background-color, white);
+  min-height: 400px;
 }
 
-/* separator via CSS, no extra DOM nodes */
-.breadcrumb nav ol li + li::before {
-  content: '/';
-  color: var(--color-text-muted, #666);
+.banner .banner-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-.breadcrumb nav ol li a {
-  color: var(--link-color, #0070f3);
+.banner .banner-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.banner .banner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay for image background */
+.banner.has-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 40%) 0%,
+    rgb(0 0 0 / 60%) 100%
+  );
+  z-index: 1;
+}
+
+.banner .banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.banner .banner-title {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: inherit;
+}
+
+.banner.has-image .banner-title {
+  color: var(--background-color, white);
+}
+
+.banner .banner-body {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: inherit;
+}
+
+.banner.has-image .banner-body {
+  color: var(--background-color, white);
+  opacity: 0.9;
+}
+
+.banner .banner-button {
+  margin-top: 0.5rem;
+}
+
+.banner .banner-button .button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--link-color, #0070f3);
+  color: var(--background-color, white);
   text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
-.breadcrumb nav ol li a:hover {
-  text-decoration: underline;
+.banner .banner-button .button:hover {
+  background-color: var(--link-hover-color, #0056cc);
 }
 
-.breadcrumb nav ol li span[aria-current='page'] {
-  color: var(--color-text, #333);
-  font-weight: 500;
+/* Tablet breakpoint */
+@media (width >= 600px) {
+  .banner {
+    padding: 4rem 2rem;
+    min-height: 350px;
+  }
+
+  .banner.has-image {
+    min-height: 450px;
+  }
+
+  .banner .banner-title {
+    font-size: 2.5rem;
+  }
+
+  .banner .banner-body {
+    font-size: 1.25rem;
+  }
+}
+
+/* Desktop breakpoint */
+@media (width >= 900px) {
+  .banner {
+    padding: 5rem 2rem;
+    min-height: 400px;
+  }
+
+  .banner.has-image {
+    min-height: 500px;
+  }
+
+  .banner .banner-title {
+    font-size: 3rem;
+  }
+}
+
+/* Large desktop breakpoint */
+@media (width >= 1200px) {
+  .banner {
+    min-height: 450px;
+  }
+
+  .banner.has-image {
+    min-height: 550px;
+  }
+
+  .banner .banner-title {
+    font-size: 3.5rem;
+  }
 }
