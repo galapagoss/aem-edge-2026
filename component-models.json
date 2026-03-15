@@ -216,7 +216,7 @@
     "id": "banner",
     "fields": [
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "title",
         "label": "Title"
@@ -243,12 +243,12 @@
       {
         "component": "text",
         "name": "linkText",
-        "label": "Text"
+        "label": "Text to display for the link"
       },
       {
         "component": "text",
         "name": "linkTitle",
-        "label": "Title"
+        "label": "Title attribute for the link"
       }
     ]
   },

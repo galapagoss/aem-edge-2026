@@ -18,6 +18,7 @@ export default async function decorate(block) {
   // Process each row
   rows.forEach((row) => {
     const content = row.firstElementChild;
+    console.log(content);
     if (!content) return;
 
     // Check if this row contains an image
