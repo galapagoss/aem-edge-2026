@@ -26,6 +26,12 @@
         "valueType": "string",
         "name": "authorcreator",
         "label": "authorcreator"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "newproperty",
+        "label": "New Property"
       }
     ]
   },
