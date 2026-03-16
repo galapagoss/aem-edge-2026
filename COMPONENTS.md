@@ -236,6 +236,40 @@ El JavaScript debe transformar esto al DOM final deseado.
 </html>
 ```
 
+## Variantes de Banner
+
+El banner soporta las siguientes variantes (clases CSS):
+
+| Variante | Descripción | Uso |
+|----------|-------------|-----|
+| `small` | Compacto (150-200px) | Avisos cortos |
+| `large` | Prominente (400-600px) | Contenido destacado |
+| `hero` | 80% viewport height | Landing pages |
+| `left-aligned` | Contenido a la izquierda | Layouts asimétricos |
+| `right-aligned` | Contenido a la derecha | Layouts asimétricos |
+| `no-overlay` | Sin oscurecimiento de imagen | Imágenes claras |
+| `rounded-none` | Esquinas cuadradas | Estilo moderno |
+| `rounded-sm` | Esquinas ligeramente redondeadas (8px) | Subtle |
+| `rounded-full` | Forma de píldora | Estilo único |
+
+### Uso en el CMS
+
+En el campo "Banner Style" del Universal Editor, seleccionar la variante deseada.
+
+### Uso en HTML local
+
+Añadir una fila con el nombre de la variante antes del contenido:
+
+```html
+<div class="banner">
+  <div>small</div>  <!-- Aplica clase .small -->
+  <div>
+    <h2>Título</h2>
+    <p>Contenido...</p>
+  </div>
+</div>
+```
+
 ## 7. Checklist antes de commitear
 
 - [ ] JavaScript sigue el patrón de export default

@@ -7,7 +7,10 @@
   padding: 3rem 1.5rem;
   text-align: center;
   background-color: var(--light-color, #f5f5f5);
-  min-height: 300px;
+  min-height: 250px;
+  max-height: 350px;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .banner.has-image {
@@ -99,11 +102,13 @@
 @media (width >= 600px) {
   .banner {
     padding: 4rem 2rem;
-    min-height: 350px;
+    min-height: 300px;
+    max-height: 400px;
   }
 
   .banner.has-image {
-    min-height: 450px;
+    min-height: 350px;
+    max-height: 450px;
   }
 
   .banner .banner-title {
@@ -119,11 +124,13 @@
 @media (width >= 900px) {
   .banner {
     padding: 5rem 2rem;
-    min-height: 400px;
+    min-height: 350px;
+    max-height: 450px;
   }
 
   .banner.has-image {
-    min-height: 500px;
+    min-height: 400px;
+    max-height: 500px;
   }
 
   .banner .banner-title {
@@ -134,14 +141,134 @@
 /* Large desktop breakpoint */
 @media (width >= 1200px) {
   .banner {
-    min-height: 450px;
+    min-height: 400px;
+    max-height: 500px;
   }
 
   .banner.has-image {
-    min-height: 550px;
+    min-height: 450px;
+    max-height: 550px;
   }
 
   .banner .banner-title {
     font-size: 3.5rem;
   }
+}
+
+/* ============================================
+   BANNER VARIANTS
+   Add these classes in the CMS: "banner small"
+   ============================================ */
+
+/* Small - Compact for notices */
+.banner.small {
+  min-height: 150px;
+  max-height: 200px;
+  padding: 1.5rem 1rem;
+}
+
+.banner.small .banner-title {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.banner.small .banner-body {
+  font-size: 0.875rem;
+  margin: 0 0 1rem;
+}
+
+.banner.small .banner-button .button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Large - More prominent */
+.banner.large {
+  min-height: 400px;
+  max-height: 600px;
+}
+
+.banner.large .banner-title {
+  font-size: 2.5rem;
+}
+
+@media (width >= 600px) {
+  .banner.large {
+    min-height: 500px;
+    max-height: 700px;
+  }
+
+  .banner.large .banner-title {
+    font-size: 3rem;
+  }
+}
+
+@media (width >= 900px) {
+  .banner.large {
+    min-height: 600px;
+    max-height: 800px;
+  }
+
+  .banner.large .banner-title {
+    font-size: 4rem;
+  }
+}
+
+/* Hero - Full viewport height */
+.banner.hero {
+  min-height: 80vh;
+  max-height: none;
+  border-radius: 0;
+}
+
+.banner.hero .banner-title {
+  font-size: 2.5rem;
+}
+
+@media (width >= 900px) {
+  .banner.hero .banner-title {
+    font-size: 4rem;
+  }
+}
+
+/* Left aligned content */
+.banner.left-aligned {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.banner.left-aligned .banner-content {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Right aligned content */
+.banner.right-aligned {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.banner.right-aligned .banner-content {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* No overlay - Image without darkening */
+.banner.no-overlay.has-image::before {
+  display: none;
+}
+
+/* No rounded corners */
+.banner.rounded-none {
+  border-radius: 0;
+}
+
+/* Square corners (smaller radius) */
+.banner.rounded-sm {
+  border-radius: 8px;
+}
+
+/* Full rounded (pill shape) */
+.banner.rounded-full {
+  border-radius: 9999px;
 }

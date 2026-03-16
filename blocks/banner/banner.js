@@ -17,12 +17,20 @@ export default async function decorate(block) {
 
   // Process each row
   rows.forEach((row) => {
-    const content = row.firstElementChild;
-    console.log(content);
-    if (!content) return;
+    const cell = row.firstElementChild;
+    if (!cell) return;
+
+    const text = cell.textContent.trim();
+
+    // Check for style variant (small, large, hero, etc.)
+    const styleVariants = ['small', 'large', 'hero', 'left-aligned', 'right-aligned', 'no-overlay', 'rounded-none', 'rounded-sm', 'rounded-full'];
+    if (styleVariants.includes(text)) {
+      block.classList.add(text);
+      return;
+    }
 
     // Check if this row contains an image
-    const picture = content.querySelector('picture');
+    const picture = cell.querySelector('picture');
     if (picture) {
       hasImage = true;
       imageWrapper = document.createElement('div');
@@ -37,26 +45,39 @@ export default async function decorate(block) {
         imageWrapper.append(picture);
       }
     } else {
-      // Check content type and wrap appropriately
-      const text = content.textContent.trim();
+      // This is the body content (richtext with title, text, button)
+      // Process all children and add appropriate classes
+      [...cell.children].forEach((child) => {
+        const tagName = child.tagName.toLowerCase();
 
-      // Check if it's a button/link
-      const link = content.querySelector('a');
-      if (link && content.querySelectorAll('a').length === 1 && text === link.textContent.trim()) {
-        const buttonWrapper = document.createElement('div');
-        buttonWrapper.className = 'banner-button';
-        link.classList.add('button');
-        buttonWrapper.append(link);
-        bannerContent.append(buttonWrapper);
-      } else if (content.tagName === 'H1' || content.tagName === 'H2' || content.tagName === 'H3') {
-        // It's a heading
-        content.classList.add('banner-title');
-        bannerContent.append(content);
-      } else {
-        // Regular body text
-        content.classList.add('banner-body');
-        bannerContent.append(content);
-      }
+        if (tagName === 'h1' || tagName === 'h2' || tagName === 'h3') {
+          child.classList.add('banner-title');
+          bannerContent.append(child);
+        } else if (tagName === 'p') {
+          // Check if paragraph contains only a link (button)
+          const link = child.querySelector('a');
+          if (link && child.querySelectorAll('a').length === 1 && child.textContent.trim() === link.textContent.trim()) {
+            const buttonWrapper = document.createElement('div');
+            buttonWrapper.className = 'banner-button';
+            link.classList.add('button');
+            buttonWrapper.append(link);
+            bannerContent.append(buttonWrapper);
+          } else {
+            child.classList.add('banner-body');
+            bannerContent.append(child);
+          }
+        } else if (tagName === 'a') {
+          // Standalone link
+          const buttonWrapper = document.createElement('div');
+          buttonWrapper.className = 'banner-button';
+          child.classList.add('button');
+          buttonWrapper.append(child);
+          bannerContent.append(buttonWrapper);
+        } else {
+          // Any other element
+          bannerContent.append(child);
+        }
+      });
     }
   });
 

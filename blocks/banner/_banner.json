@@ -23,15 +23,8 @@
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "title",
-          "label": "Title"
-        },
-        {
-          "component": "richtext",
           "name": "body",
-          "value": "",
-          "label": "Body Text",
-          "valueType": "string"
+          "label": "Body banner"
         },
         {
           "component": "reference",
@@ -41,19 +34,22 @@
           "multi": false
         },
         {
-          "component": "aem-content",
-          "name": "link",
-          "label": "Link"
-        },
-        {
-          "component": "text",
-          "name": "linkText",
-          "label": "Text to display for the link"
-        },
-        {
-          "component": "text",
-          "name": "linkTitle",
-          "label": "Title attribute for the link"
+          "component": "select",
+          "name": "style",
+          "label": "Banner Style",
+          "valueType": "string",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "Small (Compact)", "value": "small" },
+            { "name": "Large (Prominent)", "value": "large" },
+            { "name": "Hero (Full height)", "value": "hero" },
+            { "name": "Left aligned", "value": "left-aligned" },
+            { "name": "Right aligned", "value": "right-aligned" },
+            { "name": "No overlay", "value": "no-overlay" },
+            { "name": "Square corners", "value": "rounded-none" },
+            { "name": "Small corners", "value": "rounded-sm" },
+            { "name": "Pill shape", "value": "rounded-full" }
+          ]
         }
       ]
     }
