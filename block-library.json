@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "default": {
+      "type": "git",
+      "url": "",
+      "ref": "main",
+      "blocksPath": "blocks"
+    }
+  },
+  "vendored": []
+}

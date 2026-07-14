@@ -1,0 +1,32 @@
+name: Block library check
+
+# Fails a pull request if any vendored block was hand-edited in this repo (drifts from
+# block-library.lock.json). This is the gate that makes vendored blocks read-only.
+#
+# Make it enforcing: Settings → Branches → branch protection for `main` →
+# "Require status checks to pass" → select "verify" from this workflow.
+#
+# The check is purely local (hash comparison against the lockfile) — it does NOT need
+# access to the library repo.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Verify vendored blocks are unmodified
+        run: npm run blocks:check

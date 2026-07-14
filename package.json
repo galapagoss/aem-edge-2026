@@ -12,6 +12,11 @@
     "build:json:models": "merge-json-cli -i \"models/_component-models.json\" -o \"component-models.json\"",
     "build:json:definitions": "merge-json-cli -i \"models/_component-definition.json\" -o \"component-definition.json\"",
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
+    "blocks": "node tools/blocks/cli.mjs",
+    "blocks:list": "node tools/blocks/cli.mjs list",
+    "blocks:add": "node tools/blocks/cli.mjs add",
+    "blocks:sync": "node tools/blocks/cli.mjs sync",
+    "blocks:check": "node tools/blocks/cli.mjs check",
     "prepare": "husky install"
   },
   "repository": {

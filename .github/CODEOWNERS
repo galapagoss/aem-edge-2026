@@ -1,0 +1,17 @@
+# Code owners for the block-library tooling and vendored blocks.
+#
+# Vendored blocks are generated from the library repo by the "Sync block library"
+# workflow and must NOT be hand-edited here. The block-library-check workflow enforces
+# this; CODEOWNERS additionally routes review to the maintainers.
+#
+# 1. Replace @your-org/block-library-maintainers with a real team or usernames.
+# 2. Uncomment the lines below.
+# 3. Add one line per vendored block folder (see block-library.json "vendored"),
+#    or let the maintainers own all of blocks/ if that fits your workflow.
+
+# /tools/blocks/            @your-org/block-library-maintainers
+# /block-library.json       @your-org/block-library-maintainers
+# /block-library.lock.json  @your-org/block-library-maintainers
+
+# --- vendored blocks (one line each) ---
+# /blocks/<name>/           @your-org/block-library-maintainers
